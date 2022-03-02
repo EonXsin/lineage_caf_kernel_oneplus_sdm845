@@ -1645,6 +1645,7 @@ static int qcedev_check_sha_params(struct qcedev_sha_op_req *req,
 	/* Check for sum of all src length is equal to data_len  */
 	for (i = 0, total = 0; i < req->entries; i++) {
 		if (req->data[i].len > U32_MAX - total) {
+			if (printk_ratelimit())
 			pr_err("%s: Integer overflow on total req buf length\n",
 				__func__);
 			goto sha_error;

@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -83,15 +83,13 @@ struct ctx_base_info {
  *
  * @dentry:                    Debugfs entry
  * @csid_debug:                csid debug information
- * @enable_recovery:           enable recovery
- * @enable_diag_sensor_status: enable sensor diagnosis status
+ * @enable_recovery      enable recovery
  *
  */
 struct cam_ife_hw_mgr_debug {
 	struct dentry  *dentry;
 	uint64_t       csid_debug;
 	uint32_t       enable_recovery;
-	uint32_t       camif_debug;
 };
 
 /**
@@ -121,14 +119,10 @@ struct cam_ife_hw_mgr_debug {
  * @sof_cnt                     sof count value per core, used for dual VFE
  * @epoch_cnt                   epoch count value per core, used for dual VFE
  * @eof_cnt                     eof count value per core, used for dual VFE
- * @overflow_pending            flag to specify the overflow is pending for the
+ * @overflow_pending        flat to specify the overflow is pending for the
  *                              context
- * @is_rdi_only_context         flag to specify the context has only rdi
- *                              resource
+ * @is_rdi_only_context     flag to specify the context has only rdi resource
  * @config_done_complete        indicator for configuration complete
- * @init_done                   indicate whether init hw is done
- * @dual_ife_irq_mismatch_cnt   irq mismatch count value per core, used for
- *                              dual VFE
  */
 struct cam_ife_hw_mgr_ctx {
 	struct list_head                list;
@@ -162,8 +156,6 @@ struct cam_ife_hw_mgr_ctx {
 	atomic_t                        overflow_pending;
 	uint32_t                        is_rdi_only_context;
 	struct completion               config_done_complete;
-	bool                            init_done;
-	uint32_t                        dual_ife_irq_mismatch_cnt;
 };
 
 /**
@@ -209,10 +201,9 @@ struct cam_ife_hw_mgr {
  *                      etnry functinon for the IFE HW manager.
  *
  * @hw_mgr_intf:        IFE hardware manager object returned
- * @iommu_hdl:          Iommu handle to be returned
  *
  */
-int cam_ife_hw_mgr_init(struct cam_hw_mgr_intf *hw_mgr_intf, int *iommu_hdl);
+int cam_ife_hw_mgr_init(struct cam_hw_mgr_intf *hw_mgr_intf);
 
 /**
  * cam_ife_mgr_do_tasklet_buf_done()
